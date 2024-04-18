@@ -17,7 +17,7 @@ export function NftUrlProvider({ children }) {
             if (hostname == "localhost") {
                 url = `http://${hostname}:3001${path}/${nftAddress}/${tokenId}`
             } else {
-                url = `https://${hostname}:3001${path}/${nftAddress}/${tokenId}`
+                url = `https://${hostname}${path}/${nftAddress}/${tokenId}`
             }
             options["method"] = "PUT"
             options["body"] = JSON.stringify(data)
@@ -42,7 +42,7 @@ export function NftUrlProvider({ children }) {
             if (hostname == "localhost") {
                 url = `http://${hostname}:3001${path}/${nftAddress}/${tokenId}`
             } else {
-                url = `https://${hostname}:3001${path}/${nftAddress}/${tokenId}`
+                url = `https://${hostname}${path}/${nftAddress}/${tokenId}`
             }
             options["method"] = "GET"
             let response = await fetch(url, options)
