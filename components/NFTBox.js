@@ -161,7 +161,7 @@ export default function NFTBox({ price, nftAddress, tokenId, seller }) {
                                 />
                             </div>
                         ) : (
-                            <div className="h-[100px] flex items-center justify-center ">
+                            <div className="h-[200px] flex items-center justify-center ">
                                 Loading...
                             </div>
                         )}
