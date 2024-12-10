@@ -9,6 +9,8 @@ input[type="number"] {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+ #---------------------------ConnectButon----------------------------------
+
 .sc-hRJfrW {
     color: #3aa89b !important;
     font-size: 17px !important;
@@ -16,12 +18,14 @@ input[type="number"] {
 .sc-cfxfcM {
     background-color: #dff2f0 !important;
 }
+
 .sc-gFAWRd {
     background-color: white !important;
     border-color: #3aa89b !important;
 }
 .gCBXtb {
     color: #3aa89b !important;
+    font-size: 17px !important;
 }
 .sc-JrDLc {
     color: #2a8178 !important;
@@ -29,32 +33,7 @@ input[type="number"] {
 .sc-hCPjZK {
     color: #3aa89b !important;
 }
-.sc-fBWQRz:hover {
-    background-color: #dcf7f4 !important;
-}
-.sc-ibQAlb {
-    color: #68738d !important;
-}
-
-.sc-jaXxmE {
-    outline-color: #3aa89b !important;
-}
-.sc-jGKxIK {
-    --tw-ring-color: white !important;
-}
-.sc-cPiKLX {
-    color: #3aa89b !important;
-    background-color: white !important;
-    border-color: #dcf7f4 !important;
-}
-.daJpze {
-    background-color: white !important;
-    //border-color: black !important;
-    border-radius: 40px !important;
-    border: 1rem solid #dcf7f4 !important;
-}
-
-h2 {
+#--------------------------------------------------------------------------------- h2 {
     font-family: "Roboto", sans-serif !important;
 }
 .customed-gradient {

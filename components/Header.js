@@ -53,7 +53,7 @@ const MobileDesktop = () => {
                         </a>
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    <div className=" m-5 mt-[150px] flex justify-end">
+                    <div className="coloredConnectButton m-5 mt-[150px] flex justify-end">
                         <ConnectButton />
                     </div>
                 </Dropdown>

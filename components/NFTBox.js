@@ -55,7 +55,7 @@ export default function NFTBox({ price, nftAddress, tokenId, seller }) {
     })
     async function updateUI() {
         const tokenURI = await getTokenURI()
-        console.log(`The tokenURI is ${tokenURI}`)
+        //console.log(`The tokenURI is ${tokenURI}`)
         if (tokenURI) {
             const requestURL = tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/")
             const tokenURIResponse = await (await fetch(requestURL)).json()
