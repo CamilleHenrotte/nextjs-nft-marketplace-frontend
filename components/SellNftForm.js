@@ -9,7 +9,7 @@ import useVariables from "../hooks/useVariables"
 
 const SellNFTForm = () => {
     const { runContractFunction } = useWeb3Contract()
-    const { isWeb3Enabled } = useMoralis()
+    const { enableWeb3, isWeb3Enabled } = useMoralis()
     const dispatch = useNotification()
     const { marketplaceAddress } = useVariables()
     const [formData, setFormData] = useState({
@@ -24,13 +24,24 @@ const SellNFTForm = () => {
     }
 
     const handleSubmit = async (event) => {
+        console.log("a")
         event.preventDefault()
+        if (!isWeb3Enabled) {
+            await enableWeb3() // Ensure Web3 is enabled
+        }
         if (!isWeb3Enabled) {
             handleErrorNotConnected()
             return
         }
         console.log("Approving...")
         const nftAddress = formData.nftAddress.replace(/^\s+|\s+$/gm, "")
+        if (!ethers.utils.isAddress(nftAddress)) {
+            return dispatch({
+                type: "error",
+                title: "Error : invalid NFT address!",
+                position: "topR",
+            })
+        }
         const tokenId = formData.tokenId
         const price = ethers.utils.parseUnits(formData.price, "ether").toString()
         const approveOptions = {
@@ -92,49 +103,57 @@ const SellNFTForm = () => {
             position: "topR",
         })
     }
+    function handleErrorNotConnected() {
+        dispatch({
+            type: "error",
+            message: "Please connect your wallet before listing an NFT.",
+            title: "Wallet Not Connected",
+            position: "topR",
+        })
+    }
     return (
         <form onSubmit={handleSubmit} className="space-y-3 text-gray-500">
-            <div>
-                <input
-                    type="text"
-                    id="nftAddress"
-                    name="nftAddress"
-                    value={formData.nftAddress}
-                    onChange={handleChange}
-                    required
-                    className=" border border-gray-300 rounded-full px-4 py-2 w-full placeholder-gray-500  focus:outline-none focus:ring-2 focus:ring-lightgreen1 focus:border-0"
-                    placeholder="NFT Address"
-                />
-            </div>
-            <div>
-                <input
-                    type="number"
-                    id="tokenId"
-                    name="tokenId"
-                    value={formData.tokenId}
-                    onChange={handleChange}
-                    required
-                    className="border border-gray-300 rounded-full px-4 py-2 w-full placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-lightgreen1 focus:border-0"
-                    placeholder="Token ID"
-                />
-            </div>
-            <div>
-                <input
-                    type="number"
-                    id="price"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleChange}
-                    required
-                    className="border border-gray-300 rounded-full px-4 py-2 w-full placeholder-gray-500  focus:outline-none focus:ring-2 focus:ring-lightgreen1 focus:border-0"
-                    placeholder="Price (in ETH)"
-                    // Disable arrows for number input
-                    onWheel={(e) => e.preventDefault()}
-                />
-            </div>
-            <div className="flex justify-end">
-                <ButtonSecondary type="submit">Sell NFT</ButtonSecondary>
-            </div>
+            <input
+                type="text"
+                id="nftAddress"
+                name="nftAddress"
+                value={formData.nftAddress}
+                onChange={handleChange}
+                required
+                className=" border border-gray-300 rounded-full px-4 py-2 w-full placeholder-gray-500  focus:outline-none focus:ring-2 focus:ring-lightgreen1 focus:border-0"
+                placeholder="NFT Address"
+            />
+
+            <input
+                type="number"
+                id="tokenId"
+                name="tokenId"
+                value={formData.tokenId}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 rounded-full px-4 py-2 w-full placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-lightgreen1 focus:border-0"
+                placeholder="Token ID"
+            />
+
+            <input
+                type="number"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 rounded-full px-4 py-2 w-full placeholder-gray-500  focus:outline-none focus:ring-2 focus:ring-lightgreen1 focus:border-0"
+                placeholder="Price (in ETH)"
+                // Disable arrows for number input
+                onWheel={(e) => e.preventDefault()}
+            />
+
+            <button
+                type="submit"
+                className="text-[16px] text-secondary   bg-lightgreen1 hover:bg-lightgreen2    font-medium rounded-full text-sm px-4 py-1.5 focus:outline-none focus:border-0 "
+            >
+                Sell NFT
+            </button>
         </form>
     )
 }
